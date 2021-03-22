@@ -1,6 +1,6 @@
 from core.reader import *
 
-print('PE2Vector-Convertor with Python3')
+print('PE2IMG-Convertor')
 PATH = input('PATH >> ')
 
 GetRaw(PATH)

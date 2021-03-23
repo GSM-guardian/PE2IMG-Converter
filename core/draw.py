@@ -5,6 +5,8 @@ import os
 def drawingImg(PATH, RAW):
     SizeOfFile = os.path.getsize(PATH) / 1024
     width = 0
+    raw = RAW
+
     if SizeOfFile < 10:
         width = 32
     elif SizeOfFile >= 10 and SizeOfFile < 30:
@@ -21,6 +23,13 @@ def drawingImg(PATH, RAW):
         width = 768
     else:
         width = 1024
-    ImgBitArray = np.reshape(RAW, ((int(len(RAW) / width)), width))
+
+    if  len(raw) % width != 0:
+        while True:
+            if len(raw) % width == 0:
+                break
+            raw.append(0)
+
+    ImgBitArray = np.reshape(RAW, (-1, width))
     print(len(RAW))
     cv2.imwrite('test.png', ImgBitArray)

@@ -1,13 +1,16 @@
 import cv2 
 import numpy as np
-import core.reader as rb
+import hashlib as hs
+import core.reader as rd
+
 
 def drawImg(PATH, RAW):
-    fileInfo = rb.getFileInfo(PATH)
-    sizeOfFile = fileInfo['sizeOfFile'] / 1024
-    width = 0
-    raw = RAW
+    fileInfo = rd.getFileInfo(PATH)
+    sizeOfFile = fileInfo['sizeOfFile'] / 1024 # Save in KB
+    fileName = fileInfo['fileName']
+    raw = RAW 
 
+    # Specify width according to file capacity
     if sizeOfFile < 10:
         width = 32
     elif sizeOfFile >= 10 and sizeOfFile < 30:
@@ -25,9 +28,11 @@ def drawImg(PATH, RAW):
     else:
         width = 1024
 
-    if  len(raw) % width != 0:
+    # ValueError Handler
+    if len(raw) % width != 0:
         while len(raw) % width == 0:
             raw.append(0)
 
+    # Output raw array to image
     imgPixArray = np.reshape(raw, (-1, width))
     cv2.imwrite('test.jpg', imgPixArray)

@@ -10,6 +10,7 @@ def getFileInfo(PATH):
     extensions = ['exe', 'scr', 'sys', 'vxd', 'dll', 'ocx', 'cpl', 'drv', 'obj']
     extensionCheck = False
     raw = getRaw(PATH)
+    fileName = PATH.split('/')
     
     # Extenstion Check
     for i in range(0, len(extensions)):
@@ -19,6 +20,7 @@ def getFileInfo(PATH):
 
     return {
         'PATH': PATH,
+        'fileName': fileName[len(fileName) - 1],
         'extensionCheck': extensionCheck,
         'sizeOfFile': sizeOfFile,
         'lengthOfRAW': len(raw),

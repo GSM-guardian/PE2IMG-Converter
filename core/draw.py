@@ -1,14 +1,21 @@
-import cv2 
-import numpy as np
-import hashlib as hs
-import core.reader as rd
-
+import cv2
+import os 
+import numpy
+import hashlib
+from .reader import * 
+from .log import *
 
 def drawImg(PATH, RAW):
-    fileInfo = rd.getFileInfo(PATH)
+    imgVector = RAW
+    fileInfo = getFileInfo(PATH)
     sizeOfFile = fileInfo['sizeOfFile'] / 1024 # Save in KB
+
     fileName = fileInfo['fileName']
-    raw = RAW 
+    encFileName = hashlib.md5()
+
+    # Hashing filename for img filename
+    encFileName.update(fileName.encode('utf-8'))
+    imgFileName = encFileName.hexdigest()     
 
     # Specify width according to file capacity
     if sizeOfFile < 10:
@@ -29,10 +36,12 @@ def drawImg(PATH, RAW):
         width = 1024
 
     # ValueError Handler
-    if len(raw) % width != 0:
-        while len(raw) % width == 0:
-            raw.append(0)
+    if len(imgVector) % width != 0:
+        while True:
+            imgVector.append(0)
+            if len(imgVector) % width == 0:
+                break
 
-    # Output raw array to image
-    imgPixArray = np.reshape(raw, (-1, width))
-    cv2.imwrite('test.jpg', imgPixArray)
+    # Output 2D Vector array to image
+    imgPixArray = numpy.reshape(imgVector, (-1, width))
+    cv2.imwrite(imgFileName + '.png', imgPixArray)

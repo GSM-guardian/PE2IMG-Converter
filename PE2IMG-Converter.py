@@ -1,11 +1,18 @@
 import sys
-import core.reader as rd
-import core.draw as dr
+import os
+from core.reader import *
+from core.draw import *
 
 print('PE2IMG-Converter')
-PATH = input('PATH >> ')
-rd.getFileInfo(PATH)
-dr.drawImg(PATH, rd.getRaw(PATH))
 
-# if len(sys.argv) != 2:
-#     print('')
+PATH = input('PATH >> ')
+dataList = getDataList(PATH)
+
+if not os.path.isdir(PATH):
+    print('PATH is not dir')
+else:
+    for data in dataList:
+        dataPath = PATH + '/' + data
+        drawImg(dataPath, getRaw(dataPath))
+        print(data + ' drawing to PNG image...')
+    print('Done!')

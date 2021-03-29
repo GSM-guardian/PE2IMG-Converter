@@ -1,5 +1,9 @@
 import time, os
 
+def getDataList(PATH):
+    dataList = os.listdir(PATH)
+    return dataList
+
 def getRaw(PATH): 
     with open(PATH, 'rb') as f01:
         raw = bytearray(f01.read())
@@ -13,8 +17,8 @@ def getFileInfo(PATH):
     fileName = PATH.split('/')
     
     # Extenstion Check
-    for i in range(0, len(extensions)):
-        if PATH[-3:] == extensions[i]:
+    for extension in extensions:
+        if PATH[-3:] == extension:
             extensionCheck = True
             break
 

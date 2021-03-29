@@ -2,7 +2,7 @@ import cv2
 import os 
 import numpy
 import hashlib
-from .reader import * 
+from .reader import getFileInfo
 from .log import *
 
 def drawImg(PATH, RAW):

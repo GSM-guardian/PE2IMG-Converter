@@ -1,4 +1,5 @@
-import time, os
+import os
+import time
 
 def getDataList(PATH):
     dataList = os.listdir(PATH)

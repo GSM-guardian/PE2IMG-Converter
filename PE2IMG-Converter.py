@@ -1,7 +1,7 @@
 import sys
 import os
-from core.reader import *
-from core.draw import *
+from core.reader import getDataList, getRaw
+from core.draw import drawImg
 
 print('PE2IMG-Converter')
 

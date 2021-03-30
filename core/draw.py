@@ -13,6 +13,9 @@ def drawImg(PATH, RAW):
     fileName = fileInfo['fileName']
     encFileName = hashlib.md5()
 
+    if fileInfo['extensionCheck'] == False:
+        print(fileName + ' is not PE Format')
+
     # Hashing filename for img filename
     encFileName.update(fileName.encode('utf-8'))
     imgFileName = encFileName.hexdigest()     
